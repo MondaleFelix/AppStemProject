@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import Foundation
 
 class SearchVC: UIViewController {
 
     let searchTextField = ASTextField()
     let searchButton = ASButton(backgroundColor: .systemBlue, title: "GO")
     let suggestionTextLabel = ASTextLabel(textAlignment: .left, textColor: .systemBlue)
-    var collectionView: UICollectionView?
-    
+    var collectionView: UICollectionView!
+    var photosList: [Photo] = []
+    var downloadedImages: [UIImage] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -21,16 +23,45 @@ class SearchVC: UIViewController {
         configureTextField()
         configureSuggestionLabel()
         createDismissKeyboardTapGesture()
-        getPhotos()
+        configureCollectionView()
+
+        
     }
     
-    func getPhotos(){
-        NetworkManager.shared.getPhotos(for: "Lemon") { [weak self] (result) in
+    func downloadPhotos(){
+
+        for photo in photosList {
+            NetworkManager.shared.downloadImage(from: photo.src.original) { [weak self] (result) in
+                guard let self = self else { return }
+                
+                switch result {
+                case.success(let image):
+
+                    self.downloadedImages.append(image)
+                    if photo.src.original == self.photosList.last?.src.original {
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+
+    }
+    
+    
+    
+    func getPhotos(query: String){
+        NetworkManager.shared.getPhotos(for: query) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
             case.success(let photos):
-                print(photos)
+                self.photosList = photos
+                self.downloadPhotos()
             case .failure(let error):
                 print(error)
             }
@@ -48,7 +79,8 @@ class SearchVC: UIViewController {
     
     @objc func searchButtonPressed(){
         // TODO: Network request when button pressed
-        print(searchTextField.text ?? "No Input")
+        getPhotos(query: searchTextField.text!)
+        self.collectionView.reloadData()
     }
     
     
@@ -82,7 +114,7 @@ class SearchVC: UIViewController {
     
     private func configureSuggestionLabel(){
         view.addSubview(suggestionTextLabel)
-        suggestionTextLabel.text = "Did you mean eggs?"
+        suggestionTextLabel.text = ""
         
         NSLayoutConstraint.activate([
             suggestionTextLabel.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 10),
@@ -94,7 +126,43 @@ class SearchVC: UIViewController {
         ])
         
     }
+    
+    
+    func configureCollectionView() {
+        
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
+        view.addSubview(collectionView)
+        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.reuseID)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: suggestionTextLabel.bottomAnchor, constant: 10),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        
+        
+        ])
+    }
 
+    
+    func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
+        let width                       = view.bounds.width - 40 
+        let padding: CGFloat            = 12
+        let minimumItemSpacing: CGFloat = 10
+        let availableWidth              = width - (padding * 2) - (minimumItemSpacing * 2)
+        let itemWidth                   = availableWidth / 3
+        
+        let flowLayout                  = UICollectionViewFlowLayout()
+        flowLayout.sectionInset         = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
+        flowLayout.itemSize             = CGSize(width: itemWidth, height: itemWidth + 40)
+        
+        return flowLayout
+    }
+    
     
 }
 
@@ -103,7 +171,31 @@ extension SearchVC: UITextFieldDelegate {
         // TODO: Network request when keyboard return pressed
             // Filter TextField Value
             // Make network request to API with value
-        print("This is working")
+        getPhotos(query: textField.text!)
+        self.collectionView.reloadData()
         return true
     }
+}
+
+extension SearchVC: UICollectionViewDelegate {
+    
+}
+
+extension SearchVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photosList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseID, for: indexPath) as! PhotoCell
+        if downloadedImages.count != photosList.count{
+            return cell
+        }
+        print(indexPath.row)
+        let image = downloadedImages[indexPath.item]
+        cell.photoImageView.image = image
+        return cell
+    }
+    
+    
 }
