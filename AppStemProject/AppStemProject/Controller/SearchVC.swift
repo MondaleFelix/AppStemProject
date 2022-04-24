@@ -11,12 +11,14 @@ class SearchVC: UIViewController {
 
     let searchTextField = ASTextField()
     let searchButton = ASButton(backgroundColor: .systemBlue, title: "GO")
+    let suggestionTextLabel = ASTextLabel(textAlignment: .left, textColor: .systemBlue)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureSearchButton()
         configureTextField()
+        configureSuggestionLabel()
         createDismissKeyboardTapGesture()
     }
     
@@ -59,6 +61,21 @@ class SearchVC: UIViewController {
         ])
     }
 
+    
+    private func configureSuggestionLabel(){
+        view.addSubview(suggestionTextLabel)
+        suggestionTextLabel.text = "Did you mean eggs?"
+        
+        NSLayoutConstraint.activate([
+            suggestionTextLabel.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: 10),
+            suggestionTextLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            suggestionTextLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            suggestionTextLabel.heightAnchor.constraint(equalToConstant: 20)
+        
+        
+        ])
+        
+    }
 
     
 }
