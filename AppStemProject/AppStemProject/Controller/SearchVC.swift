@@ -12,6 +12,7 @@ class SearchVC: UIViewController {
     let searchTextField = ASTextField()
     let searchButton = ASButton(backgroundColor: .systemBlue, title: "GO")
     let suggestionTextLabel = ASTextLabel(textAlignment: .left, textColor: .systemBlue)
+    var collectionView: UICollectionView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,24 @@ class SearchVC: UIViewController {
         configureTextField()
         configureSuggestionLabel()
         createDismissKeyboardTapGesture()
+        getPhotos()
     }
+    
+    func getPhotos(){
+        NetworkManager.shared.getPhotos(for: "Lemon") { [weak self] (result) in
+            guard let self = self else { return }
+            
+            switch result {
+            case.success(let photos):
+                print(photos)
+            case .failure(let error):
+                print(error)
+            }
+            
+        }
+    }
+    
+    
     
     func createDismissKeyboardTapGesture() {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
@@ -89,4 +107,3 @@ extension SearchVC: UITextFieldDelegate {
         return true
     }
 }
-
