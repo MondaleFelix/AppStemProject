@@ -12,6 +12,8 @@
 		6F6F679628125CD200F1AE2C /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F679528125CD200F1AE2C /* SearchVC.swift */; };
 		6F6F679B28125CD500F1AE2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F6F679A28125CD500F1AE2C /* Assets.xcassets */; };
 		6F6F679E28125CD500F1AE2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F6F679C28125CD500F1AE2C /* LaunchScreen.storyboard */; };
+		6F8C4C042814E3340025356C /* ASTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C4C032814E3340025356C /* ASTextField.swift */; };
+		6F8C4C062814E7BD0025356C /* ASButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C4C052814E7BD0025356C /* ASButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		6F6F679A28125CD500F1AE2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F6F679D28125CD500F1AE2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F6F679F28125CD500F1AE2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F8C4C032814E3340025356C /* ASTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTextField.swift; sourceTree = "<group>"; };
+		6F8C4C052814E7BD0025356C /* ASButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,8 @@
 		6F6F67A628125D1C00F1AE2C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6F8C4C032814E3340025356C /* ASTextField.swift */,
+				6F8C4C052814E7BD0025356C /* ASButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -159,6 +165,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F6F679628125CD200F1AE2C /* SearchVC.swift in Sources */,
+				6F8C4C042814E3340025356C /* ASTextField.swift in Sources */,
+				6F8C4C062814E7BD0025356C /* ASButton.swift in Sources */,
 				6F6F679228125CD200F1AE2C /* AppDelegate.swift in Sources */,
 				6F6F679428125CD200F1AE2C /* SceneDelegate.swift in Sources */,
 			);
