@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F507C9028193F83003318BB /* Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F507C8F28193F83003318BB /* Histogram.swift */; };
+		6F507C9428196E26003318BB /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F507C9328196E26003318BB /* ImageVC.swift */; };
+		6F5C521E281917DB006E742A /* SuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5C521D281917DB006E742A /* SuggestionManager.swift */; };
+		6F5C5222281918EC006E742A /* dictionary.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F5C5221281918EC006E742A /* dictionary.txt */; };
 		6F6F679228125CD200F1AE2C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F679128125CD200F1AE2C /* AppDelegate.swift */; };
 		6F6F679428125CD200F1AE2C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F679328125CD200F1AE2C /* SceneDelegate.swift */; };
 		6F6F679628125CD200F1AE2C /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6F679528125CD200F1AE2C /* SearchVC.swift */; };
@@ -22,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6F507C8F28193F83003318BB /* Histogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Histogram.swift; sourceTree = "<group>"; };
+		6F507C9328196E26003318BB /* ImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
+		6F5C521D281917DB006E742A /* SuggestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionManager.swift; sourceTree = "<group>"; };
+		6F5C5221281918EC006E742A /* dictionary.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dictionary.txt; path = ../../../../Desktop/dictionary.txt; sourceTree = "<group>"; };
 		6F6F678E28125CD200F1AE2C /* AppStemProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStemProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F6F679128125CD200F1AE2C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F6F679328125CD200F1AE2C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +86,7 @@
 				6F6F679A28125CD500F1AE2C /* Assets.xcassets */,
 				6F6F679C28125CD500F1AE2C /* LaunchScreen.storyboard */,
 				6F6F679F28125CD500F1AE2C /* Info.plist */,
+				6F5C5221281918EC006E742A /* dictionary.txt */,
 			);
 			path = AppStemProject;
 			sourceTree = "<group>";
@@ -86,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				6FCF51F528150E2900608FDB /* Photo.swift */,
+				6F507C8F28193F83003318BB /* Histogram.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -105,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				6F6F679528125CD200F1AE2C /* SearchVC.swift */,
+				6F507C9328196E26003318BB /* ImageVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -113,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				6F744B9428150B9F0020BB66 /* NetworkManager.swift */,
+				6F5C521D281917DB006E742A /* SuggestionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -183,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F5C5222281918EC006E742A /* dictionary.txt in Resources */,
 				6F6F679E28125CD500F1AE2C /* LaunchScreen.storyboard in Resources */,
 				6F6F679B28125CD500F1AE2C /* Assets.xcassets in Resources */,
 			);
@@ -195,7 +208,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F507C9028193F83003318BB /* Histogram.swift in Sources */,
+				6F5C521E281917DB006E742A /* SuggestionManager.swift in Sources */,
 				6FCF51F628150E2900608FDB /* Photo.swift in Sources */,
+				6F507C9428196E26003318BB /* ImageVC.swift in Sources */,
 				6F6F679628125CD200F1AE2C /* SearchVC.swift in Sources */,
 				6F8C4C082814ED110025356C /* ASTextLabel.swift in Sources */,
 				6F8C4C042814E3340025356C /* ASTextField.swift in Sources */,

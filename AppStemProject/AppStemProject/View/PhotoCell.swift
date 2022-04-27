@@ -33,6 +33,7 @@ class PhotoCell: UICollectionViewCell {
         photoImageView.contentMode = .scaleAspectFill
         photoImageView.clipsToBounds = true
         contentView.backgroundColor = .systemGray5
+        isUserInteractionEnabled = true
 
     
         NSLayoutConstraint.activate([

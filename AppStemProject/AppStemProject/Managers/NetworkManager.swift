@@ -13,11 +13,13 @@ class NetworkManager {
     static let shared = NetworkManager()
     private init() {}
     
-    let baseURL = "https://api.pexels.com/v1/"
+    let baseURL = "https://api.unsplash.com/search/photos"
     
+    
+    // Returns a list of photos or and error message depending on network success
     func getPhotos(for image: String,completed: @escaping(Result<[Photo], ErrorMessage>) -> Void){
         
-        let endpoint = baseURL + "search?query=\(image)"
+        let endpoint = baseURL + "?query=\(image)&client_id=lSeciuM5erMJijXNtjcuVImquTn2LjELM050jVh5vpk"
         
         // Returns if URL is invalid
         guard let url = URL(string: endpoint) else {
@@ -25,11 +27,8 @@ class NetworkManager {
             completed(.failure(.invalidUrl))
             return
         }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("563492ad6f91700001000001f49339d6926c4be5896c1ff7ca51385e", forHTTPHeaderField: "Authorization")
-    
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             // Returns if error exists
             if let _ = error {
@@ -58,10 +57,7 @@ class NetworkManager {
             do {
                 let decoder = JSONDecoder()
                 let response = try decoder.decode(PhotoList.self, from: data)
-                let photos = response.photos
-                
-                
-
+                let photos = response.results
                 completed(.success(photos))
                 
             } catch {
@@ -71,17 +67,17 @@ class NetworkManager {
         task.resume()
     }
     
+    
+    // Downloads image data and returns a UIImage with data set
     func downloadImage(from urlString: String?, completed: @escaping(Result<UIImage, ErrorMessage>) -> Void) {
 
         guard let urlString = urlString else { return }
 
-        
         guard let url = URL(string: urlString) else { return }
 
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
 
-            guard let self = self else { return }
-
+            guard let _ = self else { return }
 
             if let _ = error { return }
 

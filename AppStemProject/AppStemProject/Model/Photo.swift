@@ -8,13 +8,13 @@
 import UIKit
 
 struct PhotoList: Codable {
-    var photos: [Photo]
+    var results: [Photo]
 }
 
 struct Photo: Codable {
-    var src: PhotoURL
+    var urls: PhotoURL
 }
 
 struct PhotoURL: Codable {
-    var original: String
+    var regular: String
 }
